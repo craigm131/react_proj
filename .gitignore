@@ -1,0 +1,6 @@
+.idea/*
+*.py[cod]
+__pycache__/
+*.log
+**/logs/*
+venv/*
