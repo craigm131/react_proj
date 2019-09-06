@@ -6,8 +6,7 @@ class Form extends Component {
             <div>
                 <h1>Add Lead Form</h1>
             </div>
-    )
-        ;
+        )
     }
 }
 
