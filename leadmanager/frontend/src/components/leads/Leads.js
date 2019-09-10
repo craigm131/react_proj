@@ -12,7 +12,6 @@ export class Leads extends Component {
 
     componentDidMount() {
         this.props.getLeads();
-
     }
 
     render() {
@@ -52,5 +51,4 @@ const mapStateToProps = state => ({
     leads: state.leads.leads
 });
 
-export default connect(mapStateToProps, { getLeads, deleteLead })
-(Leads);
+export default connect(mapStateToProps, { getLeads, deleteLead })(Leads);
