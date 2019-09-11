@@ -21,6 +21,12 @@ class Form extends Component {
         const { name, email, message } = this.state;
         const lead = { name, email, message};
         this.props.addLead(lead);
+        //set the component state after adding lead (clearing the text fields)
+        this.setState({
+            name: '',
+            email: '',
+            message: ''
+        });
     };
 
     render() {

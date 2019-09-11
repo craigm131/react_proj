@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createMessage } from './messages';
 
 import { GET_LEADS, DELETE_LEAD, ADD_LEAD, GET_ERRORS } from './types';
 
@@ -15,11 +16,15 @@ export const getLeads = () => dispatch => {
         .catch(err => console.log(err));
 }
 
-// DELETE LEADS
+// DELETE LEAD
 export const deleteLead = (id) => dispatch => {
     axios
         .delete(`/api/leads/${id}/`)
         .then(res => {
+            //this calls createMessage from actions/messages.js which returns the
+            //CREATE_MESSAGE type to the messages reducer, which sets the state to
+            //that message (action.payload)
+            dispatch(createMessage({ deleteLead: 'Lead Deleted' }));
             dispatch({
                 type: DELETE_LEAD,
                 payload: id
@@ -28,11 +33,12 @@ export const deleteLead = (id) => dispatch => {
         .catch(err => console.log(err));
 }
 
-// ADD LEADS
+// ADD LEAD
 export const addLead = (lead) => dispatch => {
     axios
         .post(`/api/leads/`, lead)
         .then(res => {
+            dispatch(createMessage({ addLead: 'Lead Added' }));
             dispatch({
                 type: ADD_LEAD,
                 payload: res.data
