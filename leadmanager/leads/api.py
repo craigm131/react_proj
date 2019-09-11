@@ -5,8 +5,15 @@ from .serializers import LeadSerializer
 
 # Lead Viewset
 class LeadViewSet(viewsets.ModelViewSet):
-    queryset = Lead.objects.all()
+    #overwrite the getQuery method so that only the user's leads are reutnred
     permission_classes = [
-        permissions.AllowAny
+        #permissions.AllowAny
+        permissions.IsAuthenticated
     ]
-    serializer_class = LeadSerializer
+
+    def get_queryset(self):
+        return self.request.user.leads.all()
+
+    #save the lead owner when creating the lead
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

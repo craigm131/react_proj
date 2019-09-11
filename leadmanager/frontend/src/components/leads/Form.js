@@ -8,11 +8,11 @@ class Form extends Component {
         name: '',
         email: '',
         message: ''
-    }
+    };
 
     static propTypes = {
         addLead: PropTypes.func.isRequired
-    }
+    };
 
     onChange = e => this.setState({ [e.target.name]: e.target.value });
 
