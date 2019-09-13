@@ -5,11 +5,12 @@ from .serializers import LeadSerializer
 
 # Lead Viewset
 class LeadViewSet(viewsets.ModelViewSet):
-    #overwrite the getQuery method so that only the user's leads are reutnred
+    #overwrite the getQuery method so that only the user's leads are returned
     permission_classes = [
         #permissions.AllowAny
         permissions.IsAuthenticated
     ]
+    serializer_class = LeadSerializer
 
     def get_queryset(self):
         return self.request.user.leads.all()
