@@ -6,21 +6,26 @@ import { logout } from "../../actions/auth";
 
 class Header extends Component {
     static propTypes = {
-        auth: PropTypes.object.isRequired
+        auth: PropTypes.object.isRequired,
+        logout: PropTypes.func.isRequired
     };
     render() {
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+                <span className="navbar-text mr-3">
+                    <strong>{ user ? `Welcome ${user.username}` : ""}</strong>
+                </span>
                 <li className="nav-item">
-                    <button className="nav-link btn btn-info btn-sm text-light">Logout</button>
+                    <button onClick={this.props.logout}
+                            className="nav-link btn btn-info btn-sm text-light">Logout</button>
                 </li>
             </ul>
         );
 
         const guestLinks = (
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                 <li className="nav-item">
                     <Link to="/register" className="nav-link">Register</Link>
                 </li>
@@ -52,4 +57,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { logout })(Header);
